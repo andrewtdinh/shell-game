@@ -1,2 +1,35 @@
 'use strict';
-console.log('apollo -> online');
+
+$(document).ready(init);
+
+function init(){
+  $('#begin').click(begin);
+  $('#cups').on('click', '.cup', clickCup);
+}
+
+var ball;
+
+function clickCup(){
+  var guess = $(this).index();
+
+  if(guess === ball){
+    $(this).addClass('right');
+  }
+  else {
+    begin();
+  }
+  console.log('ball', ball, 'guess', guess);
+}
+
+
+function begin(){
+  var amount = $('#amount').val() * 1;
+  ball = Math.floor(Math.random() * amount);
+  $('#cups').empty();
+
+  for(var i = 0; i < amount; i++){
+    var $cup = $('<div>');
+    $cup.addClass('cup');
+    $('#cups').append($cup);
+  }
+}
